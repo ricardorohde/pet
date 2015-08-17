@@ -7,7 +7,7 @@
     $angular.module('app').run(function($rootScope) {
     	configAuthorizationProvider();
     	function configAuthorizationProvider() {
-    		$rootScope.urlApp = 'https://pet-jonaskreling.c9.io/';
+    		$rootScope.urlApp = 'http://localhost:8080/pet/';
     		$rootScope.urlAction = $rootScope.urlApp + 'index.php/';
     		$rootScope.urlAssets = $rootScope.urlApp + 'assets';
     	}

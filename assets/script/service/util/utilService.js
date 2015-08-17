@@ -45,11 +45,11 @@
 		};
 		
 		service.urlAction = function (){
-		    return '/index.php/';
+		    return '/pet/index.php/';
 		};
 		
 		service.urlAssets = function (){
-		    return '/assets';
+		    return '/pet/assets';
 		};
 		
 		service.getImageDefault = function (){

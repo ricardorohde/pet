@@ -17,9 +17,9 @@ return array(
  		),
 		'db' => array(
             'class'=>'CDbConnection',
-            'connectionString'=>'mysql:host=127.0.0.1;dbname=pet',
-            'username'=>'jonaskreling',
-            'password'=>'',
+            'connectionString'=>'mysql:host=localhost;dbname=pet',
+            'username'=>'root',
+            'password'=>'78951236',
             'charset'=>'utf8',
         ),
 		'urlManager' => array(
