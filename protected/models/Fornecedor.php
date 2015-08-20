@@ -8,7 +8,7 @@ class Fornecedor extends CActiveRecord{
 	
 	public function relations(){
 		return array(
-			'Contatos'=>array(self::HAS_MANY, 'Contatofornecedor', 'fornecedor'),
+			'Contatofornecedor'=>array(self::HAS_MANY, 'Contatofornecedor', 'fornecedor'),
 		);
 	}
 

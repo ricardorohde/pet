@@ -27,10 +27,13 @@ class FornecedorController extends CController {
 	public function actionSalvarFornecedor() {
 		$parametros = Util::getParametrosJSON();
 		
+		$isNovoFornecedor;
 		if(isset($parametros['id']) && $parametros['id'] != ''){
 		    $fornecedor = Fornecedor::model()->findByPk($parametros['id']);
+		    $isNovoFornecedor = false;
 		}else{
 		    $fornecedor = new Fornecedor;
+		    $isNovoFornecedor = true;
 		}
 		$fornecedor->nome = $parametros['nome'];
 		$fornecedor->cnpj = $parametros['cnpj'];
@@ -50,6 +53,50 @@ class FornecedorController extends CController {
 			}
 		}catch(Exception $e){
 			throw new CHttpException(404,$e->getMessage().'['.Yii::app()->user->petatual.']');
+		}
+		
+		try{
+			if($response['sucesso'] == true){
+				if(isset($parametros['endereco'])){
+					$endereco = $parametros['endereco'];
+					$enderecofornecedor = Enderecofornecedor::model()->find("fornecedor=:fornecedor",array(':fornecedor'=>$fornecedor->id));
+					if($enderecofornecedor == null){
+						$enderecofornecedor = new Enderecofornecedor;
+					}
+					$enderecofornecedor->bairro = $endereco['bairro'];
+					$enderecofornecedor->numero = $endereco['numero'];
+					$enderecofornecedor->cep = $endereco['cep'];
+					$enderecofornecedor->endereco = $endereco['endereco'];
+					$enderecofornecedor->fornecedor = $fornecedor->id;
+					$enderecofornecedor->save();
+				}
+			}
+		}catch(Exception $e){
+			
+		}
+		
+		try{
+			if(isset($parametros['contato'])){
+				$contatos = $parametros['contato'];
+				if($isNovoFornecedor){
+					foreach ($contatos as $key => $contato) {
+						$contatofornecedor = new Contatofornecedor;
+						$contatofornecedor->tipocontato = $contato['tipocontato'];
+						$contatofornecedor->valor = $contato['valor'];
+						$contatofornecedor->petshop = Yii::app()->user->petatual;
+						$contatofornecedor->fornecedor = $fornecedor->id;
+						$contatofornecedor->save();
+					}
+				}else{
+					foreach ($contatos as $key => $contato) {
+						$contatofornecedor = Contatofornecedor::model()->find("fornecedor=:fornecedor AND tipocontato=:tipocontato",array(':fornecedor'=>$fornecedor->id,':tipocontato'=>$contato['tipocontato']));
+						$contatofornecedor->valor = $contato['valor'];
+						$contatofornecedor->save();
+					}
+				}
+			}
+		}catch(Exception $e){
+			
 		}
 		
 		Util::setParametrosJSON($response);
@@ -85,7 +132,15 @@ class FornecedorController extends CController {
 	public function actionDeletarFornecedor() {
 		$parametros = Util::getParametrosJSON();
 		
-		$fornecedor = Fornecedor::model()->findByPk($parametros[id]);
+		$enderecofornecedor = Enderecofornecedor::model()->find("fornecedor=:fornecedor",array(":fornecedor"=>$parametros['id']));
+		if($enderecofornecedor != null){
+			$enderecofornecedor->delete();
+		}
+		$contatofornecedors = Contatofornecedor::model()->findAll("fornecedor=:fornecedor",array(":fornecedor"=>$parametros['id']));
+		foreach ($contatofornecedors as $key => $contatofornecedor){
+			$contatofornecedor->delete();
+		}
+		$fornecedor = Fornecedor::model()->findByPk($parametros['id']);
 		
 		$response = array();
 		try{
@@ -97,7 +152,7 @@ class FornecedorController extends CController {
 		}catch(Exception $e){
 			if(strpos($e->getMessage(),'Integrity constraint') !== false){
 				$response['sucesso'] = false;
-				$response['mensagem'] = 'Esse registro está sendo usado em outro local do sistema!';
+				$response['mensagem'] = 'Esse registro est&aacute; sendo usado em outro local do sistema!';
 			}else{
 				throw new CHttpException(404,$e->getMessage().'['.Yii::app()->user->petatual.']');
 			}
@@ -132,16 +187,31 @@ class FornecedorController extends CController {
 			$dados['descricao'] = $fornecedor->descricao;
 			$dados['status'] = $fornecedor->status;
 			$dados['petshop'] = $fornecedor->petshop;
-			$dados['listacontatofornecedor'] = array();
-			foreach ($fornecedor->Contatos as $key => $contato) {
-				$contato = array();
-				$contato['id'] = $contato->id;
-				$contato['valor'] = $contato->valor;
-				$contato['tipocontato'] = $contato->tipocontato;
-				$contato['tipocontatonome'] = $contato->Tipocontato->nome;
-				$contato['fornecedor'] = $contato->fornecedor;
-				$dados['listacontatofornecedor'][] = $contato;
+			$dados['contato'] = array();
+			$contatofornecedors = $fornecedor->Contatofornecedor;
+			foreach ($contatofornecedors as $key => $contatofornecedor) {
+				$dados['contato'][$contatofornecedor->Tipocontato->nome] = $contatofornecedor;
 			}
+			$enderecofornecedor = Enderecofornecedor::model()->find("fornecedor=:fornecedor",array(':fornecedor'=>$fornecedor->id));
+			$endereco = array();
+			if($enderecofornecedor == null){
+				$endereco['endereco'] = '';
+				$endereco['numero'] = '';
+				$endereco['cep'] = '';
+				$endereco['bairro'] = '';
+				$endereco['bairronome'] = '';
+				$endereco['cidadenome'] = '';
+				$endereco['estadonome'] = '';
+			}else{
+				$endereco['endereco'] = isset($enderecofornecedor->endereco)?$enderecofornecedor->endereco:'';
+				$endereco['numero'] = isset($enderecofornecedor->numero)?$enderecofornecedor->numero:'';
+				$endereco['cep'] = isset($enderecofornecedor->cep)?$enderecofornecedor->cep:'';
+				$endereco['bairro'] = $enderecofornecedor->bairro;
+				$endereco['bairronome'] = $enderecofornecedor->Bairro->nome;
+				$endereco['cidadenome'] = $enderecofornecedor->Bairro->Cidadepetshop->Cidade->nome;
+				$endereco['estadonome'] = $enderecofornecedor->Bairro->Cidadepetshop->Cidade->Estado->nome;
+			}
+			$dados['endereco'] = $endereco;
 			$jsons[] = $dados;
 		}
 		

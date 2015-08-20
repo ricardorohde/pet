@@ -2,7 +2,8 @@
     /**
      * Fornecedor Controller
      **/ 
-	$angular.module('app').controller('FornecedorController',['$scope','fornecedorService','tipocontatoService','messageCenterService','utilService', function($scope,$fornecedorService,$tipocontatoService,$messageCenterService,$utilService) {
+	$angular.module('app').controller('FornecedorController',['$scope','fornecedorService','tipocontatoService','messageCenterService','utilService', 'bairroService','cidadeService',
+	                                                         function($scope,$fornecedorService,$tipocontatoService,$messageCenterService,$utilService,$bairroService,$cidadeService) {
         
         $scope.listafornecedor = [];
         $scope.listastatus = [
@@ -12,6 +13,7 @@
         $scope.listatipocontato = [];
         $scope.fornecedor = {};
         $scope.contatofornecedor = {};
+        $scope.bairro = {};
         
         $scope.colocarImagemCarregando = function (){
             $scope.fornecedor.isNotSave = true;
@@ -69,9 +71,50 @@
             }); 
 		};
 		
+		/*
+		 * Endereço
+		 */
+		$scope.findAllBairropetshop = function (){
+		    $bairroService.findAllBairropetshop(function(){
+			   $scope.listabairropetshop = $bairroService.listabairropetshop;
+			});
+		};
+		
+		$scope.findAllCidadepetshop = function (){
+		    $cidadeService.findAllCidadepetshop(function(){
+			   $scope.listacidadepetshop = $cidadeService.listacidadepetshop;
+			});
+		};
+		
+		$scope.salvarBairro = function (){
+            $bairroService.salvarBairropetshop($scope.bairro,function(dados){
+                $scope.findAllBairropetshop();
+                $scope.isNovoBairro = false;
+            });
+        };
+        
+        $scope.novaBairro = function (index){
+            $scope.bairro = $bairroService.newBairropetshop();
+        };
+        
+        $scope.selecionarBairro = function (bairro){
+            $scope.bairroSelecionado = bairro;
+        };
+        
+        $scope.copiarBairro = function (bairro){
+            $scope.fornecedor.endereco.bairro = parseInt($scope.bairroSelecionado.id);
+            $scope.fornecedor.endereco.bairronome = $scope.bairroSelecionado.nome;
+            $scope.fornecedor.endereco.cidadenome = $scope.bairroSelecionado.cidadenome;
+            $scope.fornecedor.endereco.estadonome = $scope.bairroSelecionado.estadonome;
+        };
+		
 		$scope.iniciar = function(){
 			$scope.findAllFornecedor();
 			$scope.findAllTipocontato();
+			
+			// Endereço
+			$scope.findAllBairropetshop();
+			$scope.findAllCidadepetshop();
 		};
 		$scope.iniciar();
 		

@@ -82,6 +82,21 @@
 		    service.fornecedor.logo = {'url':'','status':'I','id':''};
 		    service.fornecedor.status = '';
 		    service.fornecedor.descricao = '';
+		    service.fornecedor.endereco = {
+		    	'endereco':'',
+		    	'numero':'',
+		    	'cep':'',
+		    	'bairro':undefined
+		    };
+		    service.fornecedor.contato = {
+		    	'celular1':{tipocontato:$utilService.tpContato.CELULAR1,valor:''},
+		    	'celular2':{tipocontato:$utilService.tpContato.CELULAR2,valor:''},
+		    	'telefone1':{tipocontato:$utilService.tpContato.TELEFONE1,valor:''},
+		    	'telefone2':{tipocontato:$utilService.tpContato.TELEFONE2,valor:''},
+		    	'email':{tipocontato:$utilService.tpContato.EMAIL,valor:''},
+		    	'site':{tipocontato:$utilService.tpContato.SITE,valor:''},
+		    	'facebook':{tipocontato:$utilService.tpContato.FACEBOOK,valor:''}
+		    };
     		return service.fornecedor;
 		};
 		
@@ -106,6 +121,10 @@
 		    }
 		    if($utilService.isNullOrBlanck(fornecedor.status)){
 		        $messageCenterService.add('warning','Digite o status do seu fornecedor!',{timeout:3000});
+		        return false;
+		    }
+		    if($utilService.isNullOrBlanck(fornecedor.endereco.bairro)){
+		    	$messageCenterService.add('warning','Escolha o bairro do seu fornecedor!',{timeout:3000});
 		        return false;
 		    }
 		    return true;

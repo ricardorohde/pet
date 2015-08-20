@@ -56,7 +56,22 @@
 			return service.urlAssets()+"/images/simbolo/thumbnail-default.jpg";
 		};
 		
-		/*service.getCarregarDadosSite(function (){});*/
+		service.tpContato = {
+			SMS : 1,
+			EMAIL : 2,
+			TELEFONE : 3,
+			CELULAR : 4,
+			FACEBOOK : 5,
+			TWITER : 6,
+			WHATSAPP : 7,
+			SITE : 8,
+			CELULAR1 : 9,
+			CELULAR2 : 10,
+			TELEFONE1 : 11,
+			TELEFONE2 : 12,
+			CELULAR3 : 13,
+			TELEFONE3 : 14
+		};
 		
 		return service;
 	    
