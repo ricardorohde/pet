@@ -58,8 +58,23 @@
 		    service.parceiros.id = undefined;
 		    service.parceiros.nome = '';
 		    service.parceiros.site = '';
-		    service.parceiros.logo = '';
+		    service.parceiros.logo = {'url':'','status':'I','id':''};
 		    service.parceiros.descricao = '';
+		    service.parceiros.endereco = {
+		    	'endereco':'',
+		    	'numero':'',
+		    	'cep':'',
+		    	'bairro':undefined
+		    };
+		    service.parceiros.contato = {
+		    	'celular1':{tipocontato:$utilService.tpContato.CELULAR1,valor:''},
+		    	'celular2':{tipocontato:$utilService.tpContato.CELULAR2,valor:''},
+		    	'telefone1':{tipocontato:$utilService.tpContato.TELEFONE1,valor:''},
+		    	'telefone2':{tipocontato:$utilService.tpContato.TELEFONE2,valor:''},
+		    	'email':{tipocontato:$utilService.tpContato.EMAIL,valor:''},
+		    	'site':{tipocontato:$utilService.tpContato.SITE,valor:''},
+		    	'facebook':{tipocontato:$utilService.tpContato.FACEBOOK,valor:''}
+		    };
     		return service.parceiros;
 		};
 		
@@ -70,6 +85,10 @@
 		service.validarParceiros = function (parceiros){
 			if($utilService.isNullOrBlanck(parceiros.nome)){
 		        $messageCenterService.add('warning','Digite o nome do seu parceiro!',{timeout:3000});
+		        return false;
+		    }
+			if($utilService.isNullOrBlanck(parceiros.endereco.bairro)){
+		        $messageCenterService.add('warning','Escolha o bairro do seu parceiro!',{timeout:3000});
 		        return false;
 		    }
 		    return true;

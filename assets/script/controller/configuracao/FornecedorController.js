@@ -10,9 +10,7 @@
             {status:'ATIVO',nome:'Ativo'},
             {status:'INATIVO',nome:'Inativo'}
         ];
-        $scope.listatipocontato = [];
         $scope.fornecedor = {};
-        $scope.contatofornecedor = {};
         $scope.bairro = {};
         
         $scope.colocarImagemCarregando = function (){

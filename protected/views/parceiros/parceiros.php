@@ -46,9 +46,6 @@
 								Parceiro&nbsp;&nbsp;&nbsp;
 								<span ng-if="busca.nome != undefined && busca.nome != ''" class="text-success">(Filtro : {{busca.nome}})</span>
 							</th>
-							<th class='text-left hand' width="30%" ng-click="order('site')">
-								Site
-							</th>
 							<th class='text-center' width="10%">Editar</th>
 							<th class='text-center' width="10%">Deletar</th>
 							<th class='text-center' width="20px"></th>
@@ -60,9 +57,12 @@
 				<table class="table table-hover table-striped">
 					<tbody>
 						<tr class='hand' ng-repeat='parceiros in listaparceiros | filter:busca | orderBy:predicate:reverse'>
-							<th class='text-center' scope='row' width='10%'>{{parceiros.id}}</th>
-							<td class='text-left text-capitalize' >{{parceiros.nome}}</td>
-							<td class='text-left text-capitalize' width="30%">{{parceiros.site}}</td>
+							<th class='text-center' scope='row' width='10%' ng-click='editar(parceiros)' data-toggle="modal" data-target="#modalVisualizarParceiros">
+								{{parceiros.id}}
+							</th>
+							<td class='text-left text-capitalize' ng-click='editar(parceiros)' data-toggle="modal" data-target="#modalVisualizarParceiros">
+								{{parceiros.nome}}
+							</td>
 							<td class='text-center text-danger' width='10%'><i class='glyphicon glyphicon-edit' ng-click='editar(parceiros)' data-toggle="modal" data-target="#modalCadastroParceiros" ></i></td>
 							<td class='text-center text-danger' width='10%'><i class='glyphicon glyphicon-trash' ng-click='deletar(parceiros)'></i></td>
 						</tr>
@@ -72,6 +72,8 @@
 		</div>
 	</div>
 	<?php 
+		Yii::import('application.views.modal.modalVisualizarParceiros',true);
     	Yii::import('application.views.modal.modalCadastroParceiros',true);
+    	Yii::import('application.views.modal.modalSelectBairro',true);
     ?>
 </div>
