@@ -990,6 +990,28 @@ CREATE TABLE IF NOT EXISTS `Contatofornecedor` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `ContatoParceiros`
+-- Cadastro de todos os contatos dos parceiros
+--
+
+CREATE TABLE IF NOT EXISTS `Contatoparceiros` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parceiros` int(6) UNSIGNED NOT NULL,
+  `tipocontato` int(11) NOT NULL,
+  `valor` varchar(500) NOT NULL,
+  `petshop` int(6) UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX petshop_indice(`petshop`),
+  INDEX parceiros_indice(`parceiros`),
+  INDEX tipocontato_indice(`tipocontato`),
+  FOREIGN KEY (`petshop`) REFERENCES Petshop(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`parceiros`) REFERENCES Parceiros(`id`) ON DELETE RESTRICT,
+  FOREIGN KEY (`tipocontato`) REFERENCES Tipocontato(`id`) ON DELETE RESTRICT
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `Enderecofornecedor`
 --
 
@@ -1005,6 +1027,27 @@ CREATE TABLE IF NOT EXISTS `Enderecofornecedor` (
   INDEX fornecedor_indice(`fornecedor`),
   INDEX bairro_indice(`bairro`),
   FOREIGN KEY (`fornecedor`) REFERENCES Fornecedor(`id`) ON DELETE RESTRICT,
+  FOREIGN KEY (`bairro`) REFERENCES Bairro(`id`) ON DELETE RESTRICT
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `Enderecoparceiros`
+--
+
+CREATE TABLE IF NOT EXISTS `Enderecoparceiros` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `endereco` varchar(50) NOT NULL,
+  `numero` varchar(20) NOT NULL,
+  `cep` varchar(20) NOT NULL,
+  `referencia` varchar(500) NOT NULL,
+  `parceiros` int(6) UNSIGNED NOT NULL,
+  `bairro` int(6) UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX parceiros_indice(`parceiros`),
+  INDEX bairro_indice(`bairro`),
+  FOREIGN KEY (`parceiros`) REFERENCES Parceiros(`id`) ON DELETE RESTRICT,
   FOREIGN KEY (`bairro`) REFERENCES Bairro(`id`) ON DELETE RESTRICT
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
