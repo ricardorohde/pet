@@ -350,7 +350,7 @@ CREATE TABLE IF NOT EXISTS `Fornecedor` (
   `nome` varchar(50) NOT NULL,
   `cnpj` varchar(50) NOT NULL,
   `cpf` varchar(50) NOT NULL,
-  `descricao` varchar(50) NOT NULL,
+  `descricao` varchar(500) NOT NULL,
   `site` varchar(200) NOT NULL,
   `logo` varchar(200) NOT NULL,
   `status` varchar(200) DEFAULT 'ATIVO' NOT NULL,
@@ -718,14 +718,21 @@ CREATE TABLE IF NOT EXISTS `Tipocontato` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-insert into Tipocontato(id, nome) values(null, 'sms');
-insert into Tipocontato(id, nome) values(null, 'email');
-insert into Tipocontato(id, nome) values(null, 'telefone');
-insert into Tipocontato(id, nome) values(null, 'celular');
-insert into Tipocontato(id, nome) values(null, 'facebook');
-insert into Tipocontato(id, nome) values(null, 'twiter');
-insert into Tipocontato(id, nome) values(null, 'whatsapp');
-insert into Tipocontato(id, nome) values(null, 'site');
+INSERT INTO `Tipocontato` (`id`, `nome`) VALUES
+(1, 'sms'),
+(2, 'email'),
+(3, 'telefone'),
+(4, 'celular'),
+(5, 'facebook'),
+(6, 'twiter'),
+(7, 'whatsapp'),
+(8, 'site'),
+(9, 'celular1'),
+(10, 'celular2'),
+(11, 'telefone1'),
+(12, 'telefone2'),
+(13, 'celular3'),
+(14, 'telefone3');
 
 -- --------------------------------------------------------
 
