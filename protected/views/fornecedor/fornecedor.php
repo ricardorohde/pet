@@ -1,13 +1,13 @@
 <div ng-controller="FornecedorController">
 	<div class="row">
 	    <div class='col-xs-12'>
-	    	<h4>Parâmetros de busca</h4>
+	    	<h4>Par&acirc;metros de busca</h4>
 	    </div>
 		<div class='col-xs-12'>
 			<div class="form-group text-left">
-				<label for="" class="col-xs-6 col-sm-2 text-right control-label">Código</label>
+				<label for="" class="col-xs-6 col-sm-2 text-right control-label">C&oacute;digo</label>
 				<div class="col-xs-3">
-					<input type="text" class="form-control input-sm" placeholder="Código" ng-model="busca.id" maxlength="5">
+					<input type="text" class="form-control input-sm" placeholder="C&oacute;digo" ng-model="busca.id" maxlength="5">
 				</div>
 			</div>
 		</div>
@@ -41,13 +41,10 @@
 				<table class="table table-hover table-striped bottom">
 					<thead>
 						<tr class="active">
-							<th class='text-center hand' width="10%" ng-click="order('id')">Código</th>
+							<th class='text-center hand' width="10%" ng-click="order('id')">C&oacute;digo</th>
 							<th class='text-left hand' ng-click="order('nome')">
 								Fornecedor&nbsp;&nbsp;&nbsp;
 								<span ng-if="busca.nome != undefined && busca.nome != ''" class="text-success">(Filtro : {{busca.nome}})</span>
-							</th>
-							<th class='text-left hand' width="30%" ng-click="order('site')">
-								Site
 							</th>
 							<th class='text-center' width="10%">Editar</th>
 							<th class='text-center' width="10%">Deletar</th>
@@ -60,9 +57,12 @@
 				<table class="table table-hover table-striped">
 					<tbody>
 						<tr class='hand' ng-repeat='fornecedor in listafornecedor | filter:busca | orderBy:predicate:reverse'>
-							<th class='text-center' scope='row' width='10%'>{{fornecedor.id}}</th>
-							<td class='text-left text-capitalize' >{{fornecedor.nome}}</td>
-							<td class='text-left text-capitalize' width="30%">{{fornecedor.site}}</td>
+							<th class='text-center' scope='row' width='10%' ng-click='editar(fornecedor)' data-toggle="modal" data-target="#modalVisualizarFornecedor">
+								{{fornecedor.id}}
+							</th>
+							<td class='text-left text-capitalize' ng-click='editar(fornecedor)' data-toggle="modal" data-target="#modalVisualizarFornecedor">
+								{{fornecedor.nome}}
+							</td>
 							<td class='text-center text-danger' width='10%'><i class='glyphicon glyphicon-edit' ng-click='editar(fornecedor)' data-toggle="modal" data-target="#modalCadastroFornecedor" ></i></td>
 							<td class='text-center text-danger' width='10%'><i class='glyphicon glyphicon-trash' ng-click='deletar(fornecedor)'></i></td>
 						</tr>
@@ -71,7 +71,8 @@
 			</div>
 		</div>
 	</div>
-	<?php 
+	<?php
+		Yii::import('application.views.modal.modalVisualizarFornecedor',true);
     	Yii::import('application.views.modal.modalCadastroFornecedor',true);
     	Yii::import('application.views.modal.modalSelectBairro',true);
     ?>
