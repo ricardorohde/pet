@@ -27,8 +27,8 @@ class EnderecoController extends CController {
 	public function actionSalvarBairropetshop() {
 		$parametros = Util::getParametrosJSON();
 		
-		if(isset($parametros[id]) && $parametros[id] != ''){
-		    $bairro = Bairro::model()->findByPk($parametros[id]);
+		if(isset($parametros['id']) && $parametros['id'] != ''){
+		    $bairro = Bairro::model()->findByPk($parametros['id']);
 		}else{
 		    $bairro = new Bairro;
 		}
@@ -45,7 +45,7 @@ class EnderecoController extends CController {
 		}catch(Exception $e){
 			if(strpos($e->getMessage(),'Integrity constraint') !== false){
 				$response['sucesso'] = false;
-				$response['mensagem'] = 'Esse bairro já está cadastrado!';
+				$response['mensagem'] = 'Esse bairro j&aacute; est&aacute; cadastrado!';
 			}else{
 				throw new CHttpException(404,$e->getMessage().'['.Yii::app()->user->petatual.']');
 			}
@@ -57,7 +57,7 @@ class EnderecoController extends CController {
 	public function actionDeletarBairropetshop() {
 		$parametros = Util::getParametrosJSON();
 		
-		$bairro = Bairro::model()->findByPk($parametros[id]);
+		$bairro = Bairro::model()->findByPk($parametros['id']);
 		
 		$response = array();
 		try{
@@ -136,7 +136,7 @@ class EnderecoController extends CController {
 		}catch(Exception $e){
 			if(strpos($e->getMessage(),'unique_cidadepetshop') !== false){
 				$response['sucesso'] = false;
-				$response['mensagem'] = 'Essa cidade já está cadastrada!';
+				$response['mensagem'] = 'Essa cidade j&aacute; est&aacute; cadastrada!';
 			}else{
 				throw new CHttpException(404,$e->getMessage().'['.Yii::app()->user->petatual.']');
 			}
@@ -160,7 +160,7 @@ class EnderecoController extends CController {
 		}catch(Exception $e){
 			if(strpos($e->getMessage(),'Integrity constraint') !== false){
 				$response['sucesso'] = false;
-				$response['mensagem'] = 'Esse registro está sendo usado em outro local do sistema!';
+				$response['mensagem'] = 'Esse registro est&aacute; sendo usado em outro local do sistema!';
 			}else{
 				throw new CHttpException(404,$e->getMessage().'['.Yii::app()->user->petatual.']');
 			}
