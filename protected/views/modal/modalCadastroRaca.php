@@ -9,23 +9,23 @@
 				<form>
 					<div class="form-group text-left">
 						<label for="nome" class="control-label text-left">Nome:</label>
-						<input type="text" class="form-control" id="nome" placeholder="Nome da raça" ng-model="raca.nome" maxlength="50">
+						<input type="text" class="form-control input-sm" id="nome" placeholder="Nome da raça" ng-model="raca.nome" maxlength="50">
 					</div>
 					<div class="form-group text-left">
 						<label for="origem" class="control-label text-left">Origem:</label>
-						<input type="text" class="form-control" id="origem" placeholder="Origem" ng-model="raca.origem" maxlength="50">
+						<input type="text" class="form-control input-sm" id="origem" placeholder="Origem" ng-model="raca.origem" maxlength="50">
 					</div>
 					<div class="form-group text-left">
 						<label for="tipoanimal" class="control-label text-left">Espécie:</label>
-						<select class="form-control" ng-model="raca.tipoanimalpetshop" ng-options="tipoanimal.tipoanimalpetshop as tipoanimal.nome for tipoanimal in listatipoanimal">
+						<select class="form-control input-sm" ng-model="raca.tipoanimalpetshop" ng-options="tipoanimal.tipoanimalpetshop as tipoanimal.nome for tipoanimal in listatipoanimal">
 							<option value="">-- Selecione --</option>
 						</select>
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="salvar()">Salvar</button>
+				<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Fechar</button>
+				<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" ng-click="salvar()">Salvar</button>
 			</div>
 		</div>
 	</div>

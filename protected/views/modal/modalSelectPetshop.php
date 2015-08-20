@@ -9,7 +9,7 @@
 				<form>
 					<div class="form-group text-left">
 						<label for="petshop" class="control-label text-left">PetShop:</label>
-						<select class="form-control" ng-model="usuario.petatual.id" ng-options="petshop.id as petshop.nome for petshop in listapetshop">
+						<select class="form-control input-sm" ng-model="usuario.petatual.id" ng-options="petshop.id as petshop.nome for petshop in listapetshop">
 							<!--option value="">-- Selecione --</option-->
 						</select>
 					</div>

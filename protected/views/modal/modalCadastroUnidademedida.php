@@ -9,17 +9,17 @@
 				<form>
 					<div class="form-group text-left">
 						<label for="nome" class="control-label text-left">Unidade:</label>
-						<input type="text" class="form-control" id="nome" placeholder="Unidade" ng-model="unidademedida.nome" maxlength="20">
+						<input type="text" class="form-control input-sm" id="nome" placeholder="Unidade" ng-model="unidademedida.nome" maxlength="20">
 					</div>
 					<div class="form-group text-left">
 						<label for="sigla" class="control-label text-left">Sigla:</label>
-						<input type="text" class="form-control" id="nome" placeholder="Sigla" ng-model="unidademedida.sigla" maxlength="20">
+						<input type="text" class="form-control input-sm" id="nome" placeholder="Sigla" ng-model="unidademedida.sigla" maxlength="20">
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="salvar()">Salvar</button>
+				<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Fechar</button>
+				<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" ng-click="salvar()">Salvar</button>
 			</div>
 		</div>
 	</div>

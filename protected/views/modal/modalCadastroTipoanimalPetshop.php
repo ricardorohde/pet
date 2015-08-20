@@ -9,15 +9,15 @@
 				<form>
 					<div class="form-group text-left">
 						<label for="tipoanimal" class="control-label text-left">Tipo de Animal:</label>
-						<select class="form-control" ng-model="tipoanimalpetshop.tipoanimal" ng-options="tipoanimal.id as tipoanimal.nome for tipoanimal in listatipoanimal">
+						<select class="form-control input-sm" ng-model="tipoanimalpetshop.tipoanimal" ng-options="tipoanimal.id as tipoanimal.nome for tipoanimal in listatipoanimal">
 							<option value="">-- Selecione --</option>
 						</select>
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="salvar()">Salvar</button>
+				<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Fechar</button>
+				<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" ng-click="salvar()">Salvar</button>
 			</div>
 		</div>
 	</div>
