@@ -23,6 +23,7 @@
 	echo CHtml::scriptFile($baseScript."service/parceiros/parceirosService.js?".$time);
 	echo CHtml::scriptFile($baseScript."service/fornecedor/fornecedorService.js?".$time);
 	echo CHtml::scriptFile($baseScript."service/tipocontato/tipocontatoService.js?".$time);
+	echo CHtml::scriptFile($baseScript."service/marca/marcaService.js?".$time);
 	
 	
 	/* CONTROLLERS */
@@ -40,6 +41,7 @@
 	echo CHtml::scriptFile($baseScript."controller/configuracao/RacaController.js?".$time);
 	echo CHtml::scriptFile($baseScript."controller/configuracao/ParceirosController.js?".$time);
 	echo CHtml::scriptFile($baseScript."controller/configuracao/FornecedorController.js?".$time);
+	echo CHtml::scriptFile($baseScript."controller/configuracao/MarcaController.js?".$time);
 	
 ?>
 	

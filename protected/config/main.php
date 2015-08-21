@@ -106,6 +106,11 @@ return array(
 				'petshop/findAllRaca'=>'raca/findAllRaca',
 				'petshop/salvarRaca'=>'raca/salvarRaca',
 				'petshop/deletarRaca'=>'raca/deletarRaca',
+					
+				'petshop/marca'=>'marca/abrirMarca',
+				'petshop/findAllMarca'=>'marca/findAllMarca',
+				'petshop/salvarMarca'=>'marca/salvarMarca',
+				'petshop/deletarMarca'=>'marca/deletarMarca',
 				
 				'petshop/parceiros'=>'parceiros/abrirParceiros',
 				'petshop/findAllParceiros'=>'parceiros/findAllParceiros',
