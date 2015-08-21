@@ -6,20 +6,26 @@
 				<h4 class="modal-title text-left" id="myModalLabel">Cadastro de Raça</h4>
 			</div>
 			<div class="modal-body">
-				<form>
+				<form class="form-horizontal">
 					<div class="form-group text-left">
-						<label for="nome" class="control-label text-left">Nome:</label>
-						<input type="text" class="form-control input-sm" id="nome" placeholder="Nome da raça" ng-model="raca.nome" maxlength="50">
+						<label for="nome" class="control-label col-xs-2 text-left">Nome:</label>
+						<div class="col-xs-10">
+							<input type="text" class="form-control input-sm" id="nome" placeholder="Nome da raça" ng-model="raca.nome" maxlength="50">
+						</div>
 					</div>
 					<div class="form-group text-left">
-						<label for="origem" class="control-label text-left">Origem:</label>
-						<input type="text" class="form-control input-sm" id="origem" placeholder="Origem" ng-model="raca.origem" maxlength="50">
+						<label for="origem" class="control-label col-xs-2 text-left">Origem:</label>
+						<div class="col-xs-10">
+							<input type="text" class="form-control input-sm" id="origem" placeholder="Origem" ng-model="raca.origem" maxlength="50">
+						</div>
 					</div>
 					<div class="form-group text-left">
-						<label for="tipoanimal" class="control-label text-left">Espécie:</label>
-						<select class="form-control input-sm" ng-model="raca.tipoanimalpetshop" ng-options="tipoanimal.tipoanimalpetshop as tipoanimal.nome for tipoanimal in listatipoanimal">
-							<option value="">-- Selecione --</option>
-						</select>
+						<label for="tipoanimal" class="control-label col-xs-2 text-left">Espécie:</label>
+						<div class="col-xs-10">
+							<select class="form-control input-sm" ng-model="raca.tipoanimalpetshop" ng-options="tipoanimal.tipoanimalpetshop as tipoanimal.nome for tipoanimal in listatipoanimal">
+								<option value="">-- Selecione --</option>
+							</select>
+						</div>
 					</div>
 				</form>
 			</div>
